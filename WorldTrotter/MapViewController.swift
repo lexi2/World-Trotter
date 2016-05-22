@@ -21,11 +21,15 @@ class MapViewController: UIViewController {
         //Set it as the *the* view of this view controller
         view = mapView
         
-        let segmentedControl = UISegmentedControl(items: ["Standard", "Hybrid", "Satallite"])
+//        let segmentedControl = UISegmentedControl(items: ["Standard", "Hybrid", "Satallite"])
+        let standardString = NSLocalizedString("Standard", comment: "Standard map view")
+        let satelliteString = NSLocalizedString("Satellite", comment: "Satellite map view")
+        let hybridString = NSLocalizedString("Hybrid", comment: "Hybrid map view")
+        let segmentedControl = UISegmentedControl(items: [standardString, hybridString, satelliteString])
             segmentedControl.backgroundColor = UIColor.whiteColor().colorWithAlphaComponent(0.5)
             segmentedControl.selectedSegmentIndex = 0
         
-        segmentedControl.addTarget(self, action: "mapTypeChanged:", forControlEvents: .ValueChanged)
+        segmentedControl.addTarget(self, action: #selector(MapViewController.mapTypeChanged(_:)), forControlEvents: .ValueChanged)
         
         segmentedControl.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(segmentedControl)
@@ -52,6 +56,7 @@ class MapViewController: UIViewController {
             break
         }
     }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
